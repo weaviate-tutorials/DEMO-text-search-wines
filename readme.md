@@ -1,12 +1,8 @@
 # Semantic search of wines
 
-This project's origin is [here](https://github.com/weaviate/weaviate-examples/tree/main/semanticsearch-transformers-wines) and the [Hackernoon article: "Semantic Search Queries Return More Informed Results"](https://hackernoon.com/semantic-search-queries-return-more-informed-results-nr5335nw).
+In this repository, you'll find the practical essence of the article [Hackernoon article: "Semantic Search Queries Return More Informed Results"](https://hackernoon.com/semantic-search-queries-return-more-informed-results-nr5335nw) distilled into code (albeit updated). The author points out a common hurdle: the struggle with searching through our own unstructured data. Weaviate, an open-source vector search engine, is introduced as a sturdy bridge over this hurdle. Following the narrative, this codebase sets up Weaviate, harnesses the open transformer model [`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) for vectorization through the [vectorization module](https://www.semi.technology/developers/weaviate/current/modules/text2vec-transformers.html), and dives into a dataset of wine reviews. This repository demonstrates how to set up Weaviate with your data and get straight to firing up search queries. 
 
 (TODO: Add demo video)
-
-(TODO: Add Description)
-
-The transformer model [`sentence-transformers/msmarco-distilroberta-base-v2`](https://huggingface.co/sentence-transformers/msmarco-distilroberta-base-v2) is connected to Weaviate as [vectorization module](https://www.semi.technology/developers/weaviate/current/modules/text2vec-transformers.html) (see `docker-compose.yaml` file).
 
 ## Prerequisites
 (TO DO)
@@ -22,3 +18,6 @@ The transformer model [`sentence-transformers/msmarco-distilroberta-base-v2`](ht
 
 ## Dataset license
 This folder contains Wine review data, retrieved from [Kaggle (from WineEnthusiast)](https://www.kaggle.com/zynicide/wine-reviews).
+
+## Notes:
+This project's origin is [here](https://github.com/weaviate/weaviate-examples/tree/main/semanticsearch-transformers-wines) and the [Hackernoon article: "Semantic Search Queries Return More Informed Results"](https://hackernoon.com/semantic-search-queries-return-more-informed-results-nr5335nw).
