@@ -12,16 +12,26 @@ In this repository, you'll find the practical essence of the article [Hackernoon
    ```bash
    pip install virtualenv
    ```
-2. **Create a Virtual Environment:** Navigate to the directory where you want to create your virtual environment, then run:
+2. **Create a Virtual Environment:** 
+   Navigate to the directory where you want to create your virtual environment, then run:
    ```bash
    virtualenv <name_of_virtualenv>
    ```
-
+3. **Activate the Virtual Environment:** 
+   On Windows, run:
+   ```bash
+   .\<name_of_virtualenv>\Scripts\activate
+   ```
+   On macOS and Linux, run:
+   source <name_of_virtualenv>/bin/activate
+4. **Install Python requirements:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 ## Usage instructions
 1. Start up Weaviate: `docker-compose up -d`. Once completed, Weaviate is running on [`http://localhost:8080`]().
-2. Install requirements: `pip install -r requirements.txt`
-3. Run `python import.py` to import 2500 wines to Weaviate.
-4. Navigate to [console.semi.technology](https://console.semi.technology/), connect to `http://localhost:8080`, navigate to the query module, and happy querying!
+2. Run `python import.py` to import 2500 wines to Weaviate.
+3. Navigate to [console.semi.technology](https://console.semi.technology/), connect to `http://localhost:8080`, navigate to the query module, and happy querying!
 
 ## Dataset license
 This folder contains Wine review data, retrieved from [Kaggle (from WineEnthusiast)](https://www.kaggle.com/zynicide/wine-reviews).
