@@ -8,7 +8,14 @@ In this repository, you'll find the practical essence of the article [Hackernoon
 (TO DO)
 
 ## Setup instructions
-(TO DO) 
+1. **Install virtualenv** (if not already installed):
+   ```bash
+   pip install virtualenv
+   ```
+2. **Create a Virtual Environment:** Navigate to the directory where you want to create your virtual environment, then run:
+   ```bash
+   virtualenv <name_of_virtualenv>
+   ```
 
 ## Usage instructions
 1. Start up Weaviate: `docker-compose up -d`. Once completed, Weaviate is running on [`http://localhost:8080`]().
