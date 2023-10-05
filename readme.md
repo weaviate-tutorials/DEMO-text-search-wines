@@ -5,7 +5,33 @@ In this repository, you'll find the practical essence of the article [Hackernoon
 (TODO: Add demo video)
 
 ## Prerequisites
-(TO DO)
+Before you can run the project, you need to have Docker, Docker Compose, and Python installed on your machine. Follow the instructions below to install the prerequisites:
+
+### 1. Install Docker:
+   - **For Windows and Mac**:
+      - Download and install Docker Desktop from [Docker's official website](https://www.docker.com/products/docker-desktop).
+   - **For Linux**:
+      - Run the following commands in your terminal:
+        ```bash
+        sudo apt-get update
+        sudo apt-get install docker-ce docker-ce-cli containerd.io
+        ```
+
+### 2. Install Docker Compose:
+   - **For Windows and Mac**:
+      - Docker Compose is included with Docker Desktop.
+   - **For Linux**:
+      - Run the following command in your terminal:
+        ```bash
+        sudo apt install docker-compose
+        ```
+
+### 3. Install Python:
+   - Download and install the latest version of Python from [Python's official website](https://www.python.org/downloads/).
+   - Verify the installation by running the following command in your terminal:
+     ```bash
+     python --version
+     ```
 
 ## Setup instructions
 1. **Install virtualenv** (if not already installed):
@@ -23,11 +49,14 @@ In this repository, you'll find the practical essence of the article [Hackernoon
    .\<name_of_virtualenv>\Scripts\activate
    ```
    On macOS and Linux, run:
+   ```bash
    source <name_of_virtualenv>/bin/activate
+   ```
 4. **Install Python requirements:**
    ```bash
    pip install -r requirements.txt
    ```
+
 ## Usage instructions
 1. Start up Weaviate: `docker-compose up -d`. Once completed, Weaviate is running on [`http://localhost:8080`]().
 2. Run `python import.py` to import 2500 wines to Weaviate.
