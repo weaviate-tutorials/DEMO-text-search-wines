@@ -11,11 +11,11 @@ client = weaviate.Client(
 )
 
 # Deleting any prevously existing "Wine" collections
-print(client.collection.delete("Wine"))
+print(client.collection.delete("WineReviews"))
 
 # Creating a new collection with the defined schema
-articles = client.collection.create(
-    name="Wine",
+client.collection.create(
+    name="WineReviews",
     properties=[
         wvc.Property(
             name="title",
@@ -29,13 +29,13 @@ articles = client.collection.create(
 )
 
 # Checking is the collection is created successfully or not
-print(client.collection.exists("Wine"))
+print(client.collection.exists("WineReviews"))
 
 # Importing the data using pandas
 data = pd.read_csv('./data/wine_reviews.csv', index_col=0)
 
 # Getting the collection "Wine" that was created earlier
-wine_collection = client.collection.get("Wine")
+wine_collection = client.collection.get("WineReviews")
 
 # Iterating through the wine_reviews dataset and storing it all in an array to be inserted later
 wines_to_add = [
