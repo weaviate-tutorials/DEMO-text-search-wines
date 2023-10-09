@@ -26,6 +26,7 @@ client.collection.create(
             data_type=wvc.DataType.TEXT,
         )
     ],
+    vectorizer_config=wvc.ConfigFactory.Vectorizer.text2vec_transformers()
 )
 
 # Checking is the collection is created successfully or not
