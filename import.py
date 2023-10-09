@@ -1,72 +1,57 @@
-import pandas as pd
-import helper
 import weaviate
+from weaviate import Config
+import weaviate.classes as wvc
+import os
+import pandas as pd
 
-# initiate the Weaviate client
-client = weaviate.Client("http://localhost:8080")
-client.timeout_config = (3, 200)
+# Starting up the weaviate client
+client = weaviate.Client(
+    "http://localhost:8080",
+    additional_config=Config(grpc_port_experimental=50051),
+)
 
-# empty schema and create new schema
-client.schema.delete_all()
-schema = {
-    "classes": [
-        {
-            "class": "Wine",
-            "properties": [
-                {
-                    "name": "title",
-                    "dataType": ["text"]
-                },
-                {
-                    "name": "description",
-                    "dataType": ["text"]
-                }
-            ]
-        }
-    ]
-}
-client.schema.create(schema)
+# Deleting any prevously existing "WineReviews" collections
+print(client.collection.delete("WineReviews"))
 
-# open wine dataset (10000 items)
-df = pd.read_csv('data/wine_reviews.csv', index_col=0)
+# Creating a new collection with the defined schema
+client.collection.create(
+    name="WineReviews",
+    properties=[
+        wvc.Property(
+            name="title",
+            data_type=wvc.DataType.TEXT,
+        ),
+        wvc.Property(
+            name="description",
+            data_type=wvc.DataType.TEXT,
+        )
+    ],
+)
 
-def add_wines(data, batch_size=512, debug_mode=False):
-    """ upload wines to Weaviate
+# Checking is the collection is created successfully or not
+print(client.collection.exists("WineReviews"))
 
-    :param data: wine data in panda dataframe object
-    :type data: panda dataframe object (2 columns: 'title' and 'description')
-    :param batch_size: number of data objects to put in one batch, defaults to 512
-    :type batch_size: int, optional
-    :param debug_mode: set to True if you want to display upload errors, defaults to False
-    :type debug_mode: bool, optional
-    """    
+# Importing the data using pandas
+data = pd.read_csv('./data/wine_reviews.csv', index_col=0)
 
-    no_items_in_batch = 0
+# Getting the collection "WineReviews" that was created earlier
+wine_collection = client.collection.get("WineReviews")
 
-    for index, row in data.iterrows():
-        wine_object = {
+# Iterating through the wine_reviews dataset and storing it all in an array to be inserted later
+wines_to_add = [
+    wvc.DataObject(
+        properties={
             "title": row["title"] + '.',
             "description": row["description"],
-        }
+        },
+    )
+    for index, row in data.iterrows()
+]
 
-        wine_uuid = helper.generate_uuid('wine', row["title"]+row["description"])
+# Insertine the data into the collection
+response = wine_collection.data.insert_many(wines_to_add)
+# print(response.errors) # Used to fetch if there are any errors while inserting the data into the collection
 
-        client.batch.add_data_object(wine_object, "Wine", wine_uuid)
-        no_items_in_batch += 1
-
-        if no_items_in_batch >= batch_size:
-            results = client.batch.create_objects()
-            
-            if debug_mode:
-                for result in results:
-                    if result['result'] != {}:
-                        helper.log(result['result'])
-
-                message = str(index) + ' / ' + str(data.shape[0]) +  ' items imported'
-                helper.log(message)
-
-            no_items_in_batch = 0
-
-    client.batch.create_objects()
-
-add_wines(df.head(2500), batch_size=99, debug_mode=True)
+# Fetching any 2 wine reviews from the collection and printing the response
+response = wine_collection.query.fetch_objects(limit=2)
+print(response)

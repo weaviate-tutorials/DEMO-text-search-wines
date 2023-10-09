@@ -60,7 +60,7 @@ Before you can run the project, you need to have Docker, Docker Compose, and Pyt
 ## Usage instructions
 1. Start up Weaviate: `docker-compose up -d`. Once completed, Weaviate is running on [`http://localhost:8080`]().
 2. Run `python import.py` to import 2500 wines to Weaviate.
-3. Navigate to [console.semi.technology](https://console.semi.technology/), connect to `http://localhost:8080`, navigate to the query module, and happy querying!
+3. The data is now stored in the Weaviate instance. You can experiment with it using a python notebook or a python file.
 
 ## Dataset license
 This folder contains Wine review data, retrieved from [Kaggle (from WineEnthusiast)](https://www.kaggle.com/zynicide/wine-reviews).
