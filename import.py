@@ -10,12 +10,13 @@ client = weaviate.Client(
     additional_config=Config(grpc_port_experimental=50051),
 )
 
-# Deleting any prevously existing "WineReviews" collections
-print(client.collection.delete("WineReviews"))
+# Deleting any prevously existing "DiseaseSearch" collections
+print("delete previous")
+print(client.collection.delete("DiseaseSearch"))
 
 # Creating a new collection with the defined schema
 client.collection.create(
-    name="WineReviews",
+    name="DiseaseSearch",
     properties=[
         wvc.Property(
             name="title",
@@ -30,16 +31,17 @@ client.collection.create(
 )
 
 # Checking is the collection is created successfully or not
-print(client.collection.exists("WineReviews"))
+print("create new")
+print(client.collection.exists("DiseaseSearch"))
 
 # Importing the data using pandas
-data = pd.read_csv('./data/wine_reviews.csv', index_col=0)
+data = pd.read_csv('./data/disease.csv', index_col=0)
 
-# Getting the collection "WineReviews" that was created earlier
-wine_collection = client.collection.get("WineReviews")
+# Getting the collection "DiseaseSearch" that was created earlier
+disease_data = client.collection.get("DiseaseSearch")
 
-# Iterating through the wine_reviews dataset and storing it all in an array to be inserted later
-wines_to_add = [
+# Iterating through the disease dataset and storing it all in an array to be inserted later
+desc_to_add = [
     wvc.DataObject(
         properties={
             "title": row["title"] + '.',
@@ -50,9 +52,10 @@ wines_to_add = [
 ]
 
 # Insertine the data into the collection
-response = wine_collection.data.insert_many(wines_to_add)
+response = disease_data.data.insert_many(desc_to_add)
 # print(response.errors) # Used to fetch if there are any errors while inserting the data into the collection
 
-# Fetching any 2 wine reviews from the collection and printing the response
-response = wine_collection.query.fetch_objects(limit=2)
+# Fetching any 2 Disease Data  from the collection and printing the response
+response = disease_data.query.fetch_objects(limit=2)
+print("Output")
 print(response)
