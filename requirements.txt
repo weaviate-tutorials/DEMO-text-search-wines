@@ -1,26 +1,4 @@
-annotated-types==0.5.0
-Authlib==1.2.1
-certifi==2023.7.22
-cffi==1.16.0
-charset-normalizer==2.0.12
-cryptography==41.0.4
-decorator==5.1.1
+pandas==2.1.1
 grpcio==1.59.0
 grpcio-tools==1.59.0
-idna==3.4
-numpy==1.26.0
-pandas==2.1.1
-protobuf==4.24.4
-pycparser==2.21
-pydantic==2.4.2
-pydantic_core==2.10.1
-python-dateutil==2.8.2
-pytz==2023.3.post1
-requests==2.31.0
-six==1.16.0
-tqdm==4.66.1
-typing_extensions==4.8.0
-tzdata==2023.3
-urllib3==1.26.17
-validators==0.22.0
 weaviate-client @ git+https://github.com/weaviate/weaviate-python-client.git@6f81104a81f8a48e31a1467a8c75e85053e20f77
